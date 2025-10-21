@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Electron App</title>
+
+  <!-- โหลดฟอนต์ไทย -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --thai-font: 'Noto Sans Thai', 'Sarabun', 'Kanit', 'Segoe UI', Tahoma, sans-serif;
+      --emoji-font: 'Noto Color Emoji', 'Segoe UI Emoji', 'Apple Color Emoji';
+    }
+
+    body {
+      font-family: var(--thai-font), var(--emoji-font);
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 20px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-width: 520px;
+      width: 92%;
+    }
+
+    .title {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .button {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all .3s ease;
+      margin: 10px;
+    }
+
+    .button:hover {
+      background: white;
+      color: #667eea;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .info {
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .info > strong { display:block; margin-bottom:10px; text-align:center; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">🚀 สวัสดี Electron!</h1>
+    <p class="subtitle">นี่คือแอปเดสก์ท็อปแรกของเราที่รองรับภาษาไทย 🇹🇭</p>
+
+    <div>
+      <button class="button" onclick="showAlert()">🎊 ทักทาย</button>
+      <button class="button" onclick="showTime()">⏰ แสดงเวลา</button>
+      <button class="button" onclick="changeColor()">🎨 เปลี่ยนสี</button>
+    </div>
+
+    <div class="info">
+      <strong>🖥️ ข้อมูลระบบ:</strong>
+      <div id="systemInfo">กำลังโหลด...</div>
+    </div>
+
+    <div class="info">
+      <strong>📊 ข้อมูลโปรเซส:</strong>
+      <div>🎨 <strong>Renderer Process:</strong> ส่วนแสดงผล UI</div>
+      <div>🖥️ <strong>Main Process:</strong> จัดการหน้าต่างและแอป</div>
+      <div>🌐 <strong>Technology:</strong> HTML + CSS + JavaScript</div>
+    </div>
+  </div>
+
+  <script>
+    console.log('🎨 Renderer Process เริ่มทำงาน');
+
+    function showAlert() {
+      alert('🎉 สวัสดี! นี่คือ Desktop App ที่สร้างด้วย Electron\n\n' +
+        '✨ ใช้ HTML, CSS, JavaScript เหมือนเว็บ\n' +
+        '🖥️ แต่รันเป็น Desktop Application จริง ๆ!');
+    }
+
+    function showTime() {
+      const now = new Date();
+      alert(`⏰ เวลาปัจจุบัน: ${now.toLocaleString('th-TH')}`);
+    }
+
+    const colors = [
+      'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+      'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+      'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+      'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    ];
+    let current = 0;
+
+    function changeColor() {
+      current = (current + 1) % colors.length;
+      document.body.style.background = colors[current];
+    }
+
+    function displaySystemInfo() {
+      const info = document.getElementById('systemInfo');
+      info.innerHTML = `
+        <div>🌐 Platform: ${navigator.platform}</div>
+        <div>🔧 User Agent: ${navigator.userAgent.split(' ')[0]}</div>
+        <div>📱 Screen: ${screen.width} x ${screen.height}</div>
+        <div>🌍 Language: ${navigator.language}</div>
+      `;
+    }
+
+    window.addEventListener('DOMContentLoaded', displaySystemInfo);
+  </script>
+</body>
+</html>
