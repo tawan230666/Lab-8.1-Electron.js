@@ -16,7 +16,7 @@ On Ubuntu/WSL, Electron's bundled Chromium had no font for Thai or colour emoji,
 |---|---|
 | ![Thai text rendered as boxes](img/thai-emoji-broken.png) | ![Thai and emoji rendering correctly](img/thai-emoji-fixed.png) |
 
-**Fix:** an explicit font stack (Noto Sans Thai → Sarabun → system fonts), Noto Color Emoji for emoji, and a Twemoji fallback for systems with no emoji font at all.
+**Fix:** load Noto Sans Thai and Sarabun as web fonts, with an explicit Thai font stack and an emoji font stack (Noto Color Emoji → Segoe UI Emoji → Apple Color Emoji), so text renders the same on Linux, Windows and macOS.
 
 ## Features
 
